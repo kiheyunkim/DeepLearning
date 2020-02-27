@@ -1,20 +1,24 @@
 # coding: utf-8
 import sys, os
-sys.path.append(os.pardir)  # 부모 디렉터리의 파일을 가져올 수 있도록 설정
 import numpy as np
 import pickle
 from dataset.mnist import load_mnist
 
+sys.path.append(os.pardir)  # 부모 디렉터리의 파일을 가져올 수 있도록 설정
+
+
 def softmax(a):
-    c=np.max(a)
-    exp_a = np.exp(a-c) #OverFlow 방지
+    c = np.max(a)
+    exp_a = np.exp(a-c)## OverFlow 방지
     sum_exp_a = np.sum(exp_a)
     y = exp_a / sum_exp_a
 
     return y
 
+
 def sigmoid(x):
     return 1/(1+np.exp(-x))
+
 
 def get_data():
     (x_train, t_train), (x_test, t_test) = load_mnist(normalize=True, flatten=True, one_hot_label=False)
